@@ -104,8 +104,8 @@ public class ClickHouseConf extends AbstractArpConf<ClickHouseConf> {
     final String jdbcConnectionString = this.jdbcConnectionString == null ? defaultJdbcConnectionString : this.jdbcConnectionString;
     final String username = this.username == null ? defaultUsername : this.username;
     final String password = checkNotNull(this.password, "Missing Password.");
-
-    return String.format("%s?user=%s&password=%s", jdbcConnectionString, username, password);
+    final String separator = jdbcConnectionString.contains("?") ? "&" : "?";
+    return String.format("%s%suser=%s&password=%s", jdbcConnectionString, separator, username, password);
   }
 
   @Override
